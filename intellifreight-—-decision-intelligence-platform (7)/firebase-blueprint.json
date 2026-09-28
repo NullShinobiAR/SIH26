@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated user profile in IntelliFreight",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string" },
+        "lastLoginAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "DecisionRecord": {
+      "title": "DecisionRecord",
+      "description": "Chartering decision memory record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "commodity": { "type": "string" },
+        "cargoQuantityTonnes": { "type": "number" },
+        "originPort": { "type": "string" },
+        "destinationPort": { "type": "string" },
+        "recommendedStrategy": { "type": "string" },
+        "expectedRateUsdPerTonne": { "type": "number" },
+        "riskScore": { "type": "number" }
+      },
+      "required": ["id", "commodity", "cargoQuantityTonnes"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles for authenticated operators"
+    },
+    "/decisions/{decisionId}": {
+      "schema": "DecisionRecord",
+      "description": "Persisted decision memory fixtures"
+    }
+  }
+}
